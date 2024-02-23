@@ -1,20 +1,20 @@
-from Crypto.Cipher import DES3
+from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad, unpad
 
 def encrypt(key, data):
-    cipher = DES3.new(key, DES3.MODE_ECB)
-    padded_data = pad(data,DES3.block_size)
-    # print("padded_data: ",padded_data)
+    cipher = AES.new(key, AES.MODE_ECB)
+    padded_data = pad(data,AES.block_size)
     return cipher.encrypt(padded_data)
 
 def decrypt(key, data):
-    cipher = DES3.new(key, DES3.MODE_ECB)
-    decrypted_data = cipher.decrypt(data)
-    return unpad(decrypted_data,DES3.block_size)
+    cipher = AES.new(key, AES.MODE_ECB)
+    decrypted_data = cipher.decrypt(data,)
+    return unpad(decrypted_data,AES.block_size)
 
-key = key = get_random_bytes(24)
-# print(key)
+# Generar una clave AES
+key = get_random_bytes(16)
+
 plaintext = input("Ingrese el texto a cifrar: ").encode('utf-8')
 
 encrypted_data = encrypt(key, plaintext)
